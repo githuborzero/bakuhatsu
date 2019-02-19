@@ -3,7 +3,7 @@ name: Task
 about: Template for tasks
 title: ''
 labels: feature
-assignees: ''
+assignees: JoshuaLam26, llee1990, Monrch92
 
 ---
 
