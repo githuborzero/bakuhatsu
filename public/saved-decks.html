@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Weeds</title>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="./index.html">Weeds</a>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="./index.html">Home</a>
+      <a class="nav-item nav-link" href="./saved-decks.html">Saved Decks</a>
+    </div>
+    </div>
+  </nav>
+
+  <div id="container" class="container">
+  </div>
+
+  <script>
+    let decks = []
+    // api call to get all deck names
+    fetch("http://localhost:5000/api/decks").then(res => {
+      return res.json();
+    }).then(data => {
+      loadDecks(data);
+    });
+
+    function loadDecks(data) {
+      data.forEach(element => {
+        let card = document.createElement("div");
+        card.className = "card mt-4";
+        card.id = element["deck_name"];
+        let name = document.createElement("h5");
+        name.innerHTML = "Deck name: " + element["deck_name"];
+        name.className = "card-title";
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "Delete Deck";
+        deleteBtn.className = "btn";
+        deleteBtn.onclick = function () { deleteDeck(element["deck_name"]) };
+        let edit = document.createElement("a");
+        edit.className = "btn btn-primary";
+        edit.innerHTML = "Edit Deck"
+        edit.onclick = function () { editDeck(element["deck_name"]) };
+        edit.href = "./edit-deck.html";
+        card.appendChild(name);
+        card.appendChild(deleteBtn);
+        card.appendChild(edit);
+        document.getElementById("container").appendChild(card);
+      });
+    }
+
+    function deleteDeck(deckName) {
+      fetch("http://localhost:5000/api/deck/delete/" + deckName).then(res => {
+        return res.json();
+      }).then(data => {
+        console.log("deck removed");
+      });
+      document.getElementById("container").removeChild(document.getElementById(deckName));
+    }
+
+    function editDeck(deckName) {
+      window.localStorage.setItem("Deck", deckName);
+    }
+  </script>
+</body>
+
+</html>

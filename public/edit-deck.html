@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Weeds</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="./index.html">Weeds</a>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="./index.html">Home</a>
+      <a class="nav-item nav-link" href="./saved-decks.html">Saved Decks</a>
+    </div>
+  </nav>
+
+  <div class="container" id="container">
+    <label for="deckName">Deck:</label>
+    <input type="text" id="deckName">
+    <button class="btn btn-primary" onclick="changeName()">Change Deck Name</button>
+    <div class="row">
+    </div>
+  </div>
+
+  <script>
+    let deckName = window.localStorage.getItem("Deck");
+    document.getElementById("deckName").placeholder = deckName;
+    fetch("http://localhost:5000/api/strains/bydeck/" + deckName).then(res => {
+      return res.json();
+    }).then(data => {
+      loadStrains(data);
+    });
+
+    function loadStrains(data) {
+      data.forEach(element => {
+        let row = document.createElement("div");
+        row.className = "row";
+        row.id = element["id"];
+        let strain = document.createElement("p");
+        strain.innerHTML = element["strain"];
+        let btn = document.createElement("button");
+        btn.className = "ml-4 btn btn-primary";
+        btn.innerHTML = "Remove Strain";
+        btn.onclick = function () { deleteStrain(element["id"]) };
+        row.appendChild(strain);
+        row.appendChild(btn);
+        document.getElementById("container").appendChild(row);
+      });
+    }
+
+    function deleteStrain(id) {
+      fetch("http://localhost:5000/api/strain/delete/" + deckName + "/" + id).then(res => {
+        return res.json();
+      }).then(data => {
+        Console.log(data);
+      });
+      document.getElementById("container").removeChild(document.getElementById(id));
+    }
+
+    function changeName() {
+      fetch("http://localhost:5000/api/deck/update/" + deckName + "/" + document.getElementById("deckName").value).then(res => {
+        return res.json();
+      }).then(data => {
+        Console.log(data)
+
+      });
+      document.location.href = "./saved-decks.html";
+    }
+  </script>
+</body>
+
+</html>

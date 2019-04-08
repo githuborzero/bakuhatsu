@@ -1,41 +1,96 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="theme-color" content="#000000" />
-    <!--
-      manifest.json provides metadata used when your web app is added to the
-      homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <title>Weeds</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="./index.html">Weeds</a>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="./index.html">Home</a>
+      <a class="nav-item nav-link" href="./Saved-Decks.html">Saved Decks</a>
+    </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form id="emotionForm">
+      <h2>Select emotions you would like to relieve via medicinal marijuana:</h2>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="stress">
+        <label class="form-check-label" for="stress">Stress</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="depression">
+        <label class="form-check-label" for="depression">Depression</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="pain">
+        <label class="form-check-label" for="pain">Pain</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="headaches">
+        <label class="form-check-label" for="headaches">Headaches</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="fatigue">
+        <label class="form-check-label" for="fatigue">Fatigue</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="insomnia">
+        <label class="form-check-label" for="insomnia">Insomnia</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="lackOfAppetite">
+        <label class="form-check-label" for="lackOfAppetite">Lack of Appetite</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+
+  <script>
+    let emotions = []
+    document.getElementById("emotionForm").addEventListener('submit', proccessSearch);
+
+    function proccessSearch(e) {
+      e.preventDefault();
+      if (document.getElementById("stress").checked) {
+        emotions.push("Stress");
+      }
+      if (document.getElementById("depression").checked) {
+        emotions.push("Depression");
+      }
+      if (document.getElementById("pain").checked) {
+        emotions.push("Pain");
+      }
+      if (document.getElementById("headaches").checked) {
+        emotions.push("Headaches");
+      }
+      if (document.getElementById("fatigue").checked) {
+        emotions.push("Fatigue");
+      }
+      if (document.getElementById("insomnia").checked) {
+        emotions.push("Insomnia");
+      }
+      if (document.getElementById("lackOfAppetite").checked) {
+        emotions.push("Lack of Appetite");
+      }
+      window.localStorage.setItem("emotions", emotions.toString());
+      document.location.href = "./results.html";
+    }
+  </script>
+
+</body>
+
 </html>

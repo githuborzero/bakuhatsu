@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Weeds</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="./index.html">Weeds</a>
+        <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="./index.html">Home</a>
+            <a class="nav-item nav-link" href="./saved-decks.html">Saved Decks</a>
+        </div>
+        </div>
+    </nav>
+
+    <div id="container" class="container">
+        <div>
+            <label for="deckName">Name of Deck:</label>
+            <input type="text" id="deckName">
+            <button class="btn btn-primary" onclick="saveDeck()">Save Deck</button>
+        </div>
+        <h5>Potential strains to add to deck:</h5>
+    </div>
+    <script>
+        let emotions = window.localStorage.getItem("emotions").split(",", 8);
+        let emotionArray = "";
+        buildString(emotions)
+
+        function buildString(array) {
+            emotionArray += "[";
+            array.forEach(element => {
+                emotionArray += "%22";
+                emotionArray += element;
+                emotionArray += "%22,";
+            });
+            emotionArray = emotionArray.substring(0, emotionArray.length - 1);
+            emotionArray += "]";
+        }
+
+        let strains = [];
+        fetch("http://localhost:5000/api/strains/byemotion?array=" + emotionArray).then(res => {
+            return res.json();
+        }).then(data => {
+            loadResults(data);
+        });
+
+        function loadResults(data) {
+            data.forEach(element => {
+                strains.push(element["id"])
+                let row = document.createElement("div");
+                row.className = "row";
+                let check = document.createElement("input");
+                check.type = "checkbox";
+                check.className = "form-check-input";
+                check.id = element["id"]
+                let name = document.createElement("p");
+                name.innerHTML = element["strain"];
+                let price = document.createElement("p");
+                price.className = "ml-4";
+                price.innerHTML = "$" + element["price"];
+                let type = document.createElement("p");
+                type.className = "ml-4";
+                type.innerHTML = element["type"];
+                row.appendChild(check);
+                row.appendChild(name);
+                row.appendChild(price);
+                row.appendChild(type);
+                document.getElementById("container").appendChild(row);
+            });
+        }
+
+        function grabStrains() {
+            let results = [];
+            strains.forEach(element => {
+                if (document.getElementById(element.toString()).checked) {
+                    results.push(element);
+                }
+            });
+            return results;
+        }
+
+        function saveDeck() {
+            let strainIDs = grabStrains().toString();
+            fetch("http://localhost:5000/api/deck/add/" + document.getElementById("deckName").value + "?array=[" + strainIDs + "]").then(res => {
+                return res.json();
+            }).then(data => {
+                console.log(data);
+                document.location.href = "./saved-decks.html";
+            });
+        }
+    </script>
+</body>
+
+</html>
