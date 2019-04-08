@@ -15,10 +15,10 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./index.html">Weeds</a>
+    <a class="navbar-brand" href="/">Weeds</a>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="./index.html">Home</a>
-      <a class="nav-item nav-link" href="./Saved-Decks.html">Saved Decks</a>
+      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link" href="/saved-decks">Saved Decks</a>
     </div>
     </div>
   </nav>
@@ -87,7 +87,7 @@
         emotions.push("Lack of Appetite");
       }
       window.localStorage.setItem("emotions", emotions.toString());
-      document.location.href = "./results.html";
+      document.location.href = "/results";
     }
   </script>
 

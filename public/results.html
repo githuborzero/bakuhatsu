@@ -15,10 +15,10 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="./index.html">Weeds</a>
+        <a class="navbar-brand" href="/">Weeds</a>
         <div class="navbar-nav">
-            <a class="nav-item nav-link active" href="./index.html">Home</a>
-            <a class="nav-item nav-link" href="./saved-decks.html">Saved Decks</a>
+            <a class="nav-item nav-link active" href="/">Home</a>
+            <a class="nav-item nav-link" href="/saved-decks">Saved Decks</a>
         </div>
         </div>
     </nav>
@@ -95,7 +95,7 @@
                 return res.json();
             }).then(data => {
                 console.log(data);
-                document.location.href = "./saved-decks.html";
+                document.location.href = "/saved-decks";
             });
         }
     </script>

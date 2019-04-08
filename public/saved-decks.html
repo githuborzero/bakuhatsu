@@ -16,10 +16,10 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="./index.html">Weeds</a>
+    <a class="navbar-brand" href="/">Weeds</a>
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="./index.html">Home</a>
-      <a class="nav-item nav-link" href="./saved-decks.html">Saved Decks</a>
+      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link" href="/saved-decks">Saved Decks</a>
     </div>
     </div>
   </nav>
@@ -52,7 +52,7 @@
         edit.className = "btn btn-primary";
         edit.innerHTML = "Edit Deck"
         edit.onclick = function () { editDeck(element["deck_name"]) };
-        edit.href = "./edit-deck.html";
+        edit.href = "/edit-deck";
         card.appendChild(name);
         card.appendChild(deleteBtn);
         card.appendChild(edit);
