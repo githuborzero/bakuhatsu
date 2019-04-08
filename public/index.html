@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Weeds</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Weeds</a>
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="/">Home</a>
+      <a class="nav-item nav-link" href="/saved-decks">Saved Decks</a>
+    </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form id="emotionForm">
+      <h2>Select emotions you would like to relieve via medicinal marijuana:</h2>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="stress">
+        <label class="form-check-label" for="stress">Stress</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="depression">
+        <label class="form-check-label" for="depression">Depression</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="pain">
+        <label class="form-check-label" for="pain">Pain</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="headaches">
+        <label class="form-check-label" for="headaches">Headaches</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="fatigue">
+        <label class="form-check-label" for="fatigue">Fatigue</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="insomnia">
+        <label class="form-check-label" for="insomnia">Insomnia</label>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="lackOfAppetite">
+        <label class="form-check-label" for="lackOfAppetite">Lack of Appetite</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+  </div>
+
+  <script>
+    let emotions = []
+    document.getElementById("emotionForm").addEventListener('submit', proccessSearch);
+
+    function proccessSearch(e) {
+      e.preventDefault();
+      if (document.getElementById("stress").checked) {
+        emotions.push("Stress");
+      }
+      if (document.getElementById("depression").checked) {
+        emotions.push("Depression");
+      }
+      if (document.getElementById("pain").checked) {
+        emotions.push("Pain");
+      }
+      if (document.getElementById("headaches").checked) {
+        emotions.push("Headaches");
+      }
+      if (document.getElementById("fatigue").checked) {
+        emotions.push("Fatigue");
+      }
+      if (document.getElementById("insomnia").checked) {
+        emotions.push("Insomnia");
+      }
+      if (document.getElementById("lackOfAppetite").checked) {
+        emotions.push("Lack of Appetite");
+      }
+      window.localStorage.setItem("emotions", emotions.toString());
+      document.location.href = "/results";
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+DROP DATABASE weed;
+CREATE DATABASE weed;
+use weed;
+CREATE TABLE Strains (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, strain VARCHAR(45), price INT, type VARCHAR(45));
+CREATE TABLE Deck_Strains (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, Decks_id INT, Strains_id INT);
+CREATE TABLE Decks (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, deck_name VARCHAR(45));
+CREATE TABLE Emotion_Strains (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, Emotions_id INT, Strains_id INT);
+CREATE TABLE Emotions (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, emotion_name VARCHAR(45));
+ALTER TABLE Deck_Strains ADD CONSTRAINT fk_Decks_id FOREIGN KEY (Decks_id) REFERENCES Decks(id);
+ALTER TABLE Deck_Strains ADD CONSTRAINT fk_Strains_id FOREIGN KEY (Strains_id) REFERENCES Strains(id);
+ALTER TABLE Emotion_Strains ADD CONSTRAINT fk_Emotion_id FOREIGN KEY (Emotions_id) REFERENCES Emotions(id);
+ALTER TABLE Emotion_Strains ADD CONSTRAINT fk__Strains_id FOREIGN KEY (Strains_id) REFERENCES Strains(id);
+INSERT INTO Emotions (emotion_name) VALUES ("Stress"), ("Depression"), ("Pain"), ("Headaches"), ("Fatigue"), ("Insomnia"), ("Lack of Appetite");
+INSERT INTO Strains (strain, price, type) VALUES ("Bubba Kush", 10, "Indica");
+INSERT INTO Emotion_Strains (Emotions_id, Strains_id) VALUES (1, 1);
+INSERT INTO Decks (deck_name) VALUES ("Destressers");
+INSERT INTO Deck_Strains (Decks_id, Strains_id) VALUES (1, 1);
+
+INSERT INTO Strains (strain, price, type) VALUES ("Blue Dream", 9, "Hybrid"), ("Blackberry Kush", 11, "Indica"), ("Girl Scout Cookies", 12, "Hybrid"), ("Green Crack", 10, "Sativa"), ("White Gorilla", 12, "Hybrid"), ("Frosty", 10, "Indica"), ("Alien Rift", 9, "Indica"), ("Chocolate Chunk", 13, "Indica"), ("Banana OG", 12, "Hybrid"), ("Mars OG", 12, "India"), ("Cali Kush", 10, "Hybrid"), ("God's Gift", 12, "Indica"), ("Herijuana", 10, "Indica"), ("Grapefruit", 12, "Sativa"), ("Jesus OG", 10, "Indica"), ("Khalifa Kush", 12, "Hybrid"), ("Durban Poison", 10, "Sativa"), ("Original Glue", 12, "Hybrid"), ("Pineapple Punch", 12, "Sativa"), ("Acapulco Gold", 8, "Sativa"), ("Island Sweet Skunk", 8, "Sativa"), ("Timewreck", 9, "Sativa"), ("Don Shula", 10, "Hybrid"), ("Jack Smack", 10, "Sativa"), ("Scout's Honor", 12, "Hybrid"), ("Cirrus", 11, "Sativa"), ("Chocolate Rain", 8, "Hybrid");
+INSERT INTO Emotion_Strains (Emotions_id, Strains_id) VALUES (1, 2), (2, 2), (6, 3), (1, 4), (2, 5), (1, 6), (3, 6), (5, 7), (3, 8), (1, 8), (4, 9), (6, 9), (3, 10), (7, 10), (7, 11), (2, 12), (7, 12), (6, 13), (1, 13), (6, 14), (2, 15), (1, 16), (2, 16), (3, 16), (1, 17), (2, 17), (3, 17), (1, 18), (2, 18), (5, 18), (1, 19), (2, 19), (3, 19), (7, 20), (2, 21), (5, 21), (3, 22), (5, 22), (2, 23), (3, 23), (5, 23), (7, 23), (7, 24), (5, 24), (1, 25), (7, 25), (7, 26), (2, 26), (4, 27), (5, 27), (4, 28);
