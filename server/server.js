@@ -82,7 +82,7 @@ app.get(api + '/strains/bydeck/:deck', cors(), (request, response) => {
 app.get(api + "/deck/add/:name", cors(), (request, response) => {
     let deck = request.params.name;
     let query = 'INSERT INTO Decks (deck_name) VALUES (?);';
-    weedDb.query(query, deck, (err, res) => {
+    weedDb.query(query, deck, (err) => {
         if (err) Console.log("error", err);
         query = 'SELECT id FROM Decks WHERE deck_name = ?;';
         weedDb.query(query, deck, (err, res) => {
