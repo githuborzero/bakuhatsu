@@ -33,7 +33,7 @@
   <script>
     let deckName = window.localStorage.getItem("Deck");
     document.getElementById("deckName").placeholder = deckName;
-    fetch("http://localhost:5000/api/strains/bydeck/" + deckName).then(res => {
+    fetch("/api/strains/bydeck/" + deckName).then(res => {
       return res.json();
     }).then(data => {
       loadStrains(data);
@@ -57,7 +57,7 @@
     }
 
     function deleteStrain(id) {
-      fetch("http://localhost:5000/api/strain/delete/" + deckName + "/" + id).then(res => {
+      fetch("/api/strain/delete/" + deckName + "/" + id).then(res => {
         return res.json();
       }).then(data => {
         Console.log(data);
@@ -66,7 +66,7 @@
     }
 
     function changeName() {
-      fetch("http://localhost:5000/api/deck/update/" + deckName + "/" + document.getElementById("deckName").value).then(res => {
+      fetch("/api/deck/update/" + deckName + "/" + document.getElementById("deckName").value).then(res => {
         return res.json();
       }).then(data => {
         Console.log(data)
