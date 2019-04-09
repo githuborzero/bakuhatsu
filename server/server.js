@@ -10,7 +10,7 @@ const dbSecret = require('./secret.js');
 const Console = console;
 
 // use port 80 for production, 5000 for development
-const port = 5000;
+const port = 80;
 
 const api = '/api';
 const publicDir = '/../public';
