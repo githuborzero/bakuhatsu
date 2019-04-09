@@ -48,7 +48,7 @@
         }
 
         let strains = [];
-        fetch("http://localhost:5000/api/strains/byemotion?array=" + emotionArray).then(res => {
+        fetch("/api/strains/byemotion?array=" + emotionArray).then(res => {
             return res.json();
         }).then(data => {
             loadResults(data);
@@ -91,7 +91,7 @@
 
         function saveDeck() {
             let strainIDs = grabStrains().toString();
-            fetch("http://localhost:5000/api/deck/add/" + document.getElementById("deckName").value + "?array=[" + strainIDs + "]").then(res => {
+            fetch("/api/deck/add/" + document.getElementById("deckName").value + "?array=[" + strainIDs + "]").then(res => {
                 return res.json();
             }).then(data => {
                 console.log(data);

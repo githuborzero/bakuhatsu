@@ -30,7 +30,7 @@
   <script>
     let decks = []
     // api call to get all deck names
-    fetch("http://localhost:5000/api/decks").then(res => {
+    fetch("/api/decks").then(res => {
       return res.json();
     }).then(data => {
       loadDecks(data);
@@ -61,7 +61,7 @@
     }
 
     function deleteDeck(deckName) {
-      fetch("http://localhost:5000/api/deck/delete/" + deckName).then(res => {
+      fetch("/api/deck/delete/" + deckName).then(res => {
         return res.json();
       }).then(data => {
         console.log("deck removed");
